@@ -1063,18 +1063,39 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void consultarConsumo1()
 	{
 		try 
 		{
-			List <VOCliente> lista = parranderos.consultarConsumo1();
-
-			String resultado = "Mostrar Consumo Clientes";
-			resultado +=  "\n" + listarConsumos (lista);
-			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
-		} 
+			List<VOCliente> lista=null;
+			String tipoCliente = JOptionPane.showInputDialog (this, "Ingrese Administrador o Proveedor", "Tipo de cliente", JOptionPane.QUESTION_MESSAGE);
+			String id=JOptionPane.showInputDialog (this, "Ingrese el Id de la oferta", "Id Oferta", JOptionPane.QUESTION_MESSAGE);
+			if (id!=null) {
+				long idOf = Long.valueOf (id);
+				if (tipoCliente.equalsIgnoreCase("administrador")){
+					lista = parranderos.consultarConsumo1(tipoCliente,idOf);
+				}
+				else if (tipoCliente.equalsIgnoreCase("proveedor")) {
+					String idOp=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
+					if (idOp==null) {
+						String resultado="No se indico el Id del Operador que está realizando la consulta"; 
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					lista = parranderos.consultarConsumo1(tipoCliente,idOf);	
+				}
+				if (lista!=null) {
+					String resultado = "Mostrar Consumo Clientes";
+					resultado +=  "\n" + listarConsumos (lista);
+					panelDatos.actualizarInterfaz(resultado);
+					resultado += "\n Operación terminada";
+				}
+				else if (lista==null) {
+					String resultado="El tipo de cliente no fue válido";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			} 
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1092,9 +1113,9 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		}
 		return resp;
 	}
-	
-	
-	
+
+
+
 
 	//    public void mostrarUsoUsuario() {
 	//    	try 

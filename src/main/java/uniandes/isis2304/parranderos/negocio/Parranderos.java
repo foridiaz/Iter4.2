@@ -646,7 +646,7 @@ public class Parranderos
 	/* ****************************************************************
 	 * 			Métodos para Consumos 
 	 *****************************************************************/
-	public List<VOCliente> consultarConsumo1(){
+	public List<VOCliente> consultarConsumo1(String tipo,long IdOf){
 		
 	}
 	
