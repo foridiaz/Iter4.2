@@ -49,6 +49,10 @@
 				{
 					"label": "Mostrar ganacias",
 					"event": "mostrarGanancias"
+				},
+				{
+					"label": "Consultar Consumo",
+					"event": "consultarConsumo1"
 				}
 			]
 		},

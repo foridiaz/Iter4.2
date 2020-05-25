@@ -1062,6 +1062,27 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void consultarConsumo1()
+	{
+		try 
+		{
+			List <VOGanancia> lista = parranderos.mostrarGanancias();
+
+			String resultado = "Mostrar Ganancias Operadores";
+			resultado +=  "\n" + listarGanancias (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
 
 	//    public void mostrarUsoUsuario() {
 	//    	try 
