@@ -643,7 +643,13 @@ public class Parranderos
 		log.info ("Eliminando Reserva colectiva por id: " + resp + " tuplas eliminadas");
 		return resp;
 	}
-
+	/* ****************************************************************
+	 * 			Métodos para Consumos 
+	 *****************************************************************/
+	public List<VOCliente> consultarConsumo1(){
+		
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/

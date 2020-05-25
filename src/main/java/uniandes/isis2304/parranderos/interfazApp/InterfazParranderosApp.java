@@ -56,6 +56,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.parranderos.negocio.Contrato;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.Reserva;
+import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOContrato;
 import uniandes.isis2304.parranderos.negocio.VOGanancia;
 import uniandes.isis2304.parranderos.negocio.VOIndice;
@@ -1067,10 +1068,10 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			List <VOGanancia> lista = parranderos.mostrarGanancias();
+			List <VOCliente> lista = parranderos.consultarConsumo1();
 
-			String resultado = "Mostrar Ganancias Operadores";
-			resultado +=  "\n" + listarGanancias (lista);
+			String resultado = "Mostrar Consumo Clientes";
+			resultado +=  "\n" + listarConsumos (lista);
 			panelDatos.actualizarInterfaz(resultado);
 			resultado += "\n Operación terminada";
 		} 
@@ -1081,6 +1082,17 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	private String listarConsumos(List<VOCliente> lista) 
+	{
+		String resp = "Los consumos de los clientes son:\n";
+		int i = 1;
+		for (VOCliente tb : lista)
+		{
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
+	
 	
 	
 

@@ -86,4 +86,7 @@ public class Cliente implements VOCliente {
 	public void setVinculo(String pVinculo) {
 		this.vinculo=pVinculo;	
 	}
+	public String toString() {
+		return "Cliente [id=" + id + ", Nombre=" + nombre + ", usuario=" + usuario +", vinculo="+vinculo+"]";
+	}
 }
