@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"uniandes.isis2304.parranderos.interfazApp"},{"l":"uniandes.isis2304.parranderos.negocio"},{"l":"uniandes.isis2304.parranderos.persistencia"},{"l":"uniandes.isis2304.parranderos.test"}]

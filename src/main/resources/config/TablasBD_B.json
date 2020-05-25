@@ -1,0 +1,28 @@
+{
+	"title": "Nombres de las tablas de Parranderos Uniandes para la aplicación B",
+	"unidadPersistencia": "Parranderos",
+	"tablas":
+	[
+		"alohandes_sequence",
+		"B_APARTAMENTO",
+		"B_CLIENTE",
+		"B_CONTRATO",
+		"B_CONTRATO_APARTAMENTO",
+		"B_CONTRATO_CLIENTE_ESPORADICO",
+		"B_CONTRATO_HAB_VIVIENDA",
+		"B_CONTRATOHABHOSTAL",
+		"B_CONTRATOHABHOTEL",
+		"B_CONTRATOHABUNIVERSITARIA",
+		"B_HOSTAL",
+		"B_HOTEL",
+		"B_OPERADOR",
+		"B_PERSONA_NATURAL",
+		"B_RESERVA",
+		"B_RESERVA_COLECTIVA",
+		"B_SEGURO_ARRENDAMIENTO",
+		"B_SERVICIO_HOTEL",
+		"B_SERVICIO_HABHOTEL",
+		"B_VIVIENDA_FAMILIAR",
+		"B_VIVIENDAUNIVERSITARIA"
+	]
+}

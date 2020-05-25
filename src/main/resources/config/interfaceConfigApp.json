@@ -1,0 +1,147 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Reserva",
+		  		"options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarReserva"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarReservaPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Oferta",
+		  		"options":
+			[
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarOfertaPorId"
+				},
+				{
+					"label": "20 más populares",
+					"event": "mostrarPopulares"
+				},
+				{
+					"label": "Indices de ocupacion",
+					"event": "mostrarIndices"
+				},
+				{
+					"label": "Deshabilitar oferta",
+					"event": "deshabilitarOferta"
+				},
+				{
+					"label": "Habilitar oferta",
+					"event": "habilitarOferta"
+				}
+			]
+		},
+		{ "menuTitle": "Operadores",
+		  		"options":
+			[
+				{
+					"label": "Mostrar ganacias",
+					"event": "mostrarGanancias"
+				}
+			]
+		},
+		{"menuTitle": "Tipos Usuarios",
+		  		"options":
+			[
+				{
+					"label": "Mostrar uso por Vinculo",
+					"event": "mostrarPorVinculo"
+				},
+				{
+					"label": "Uso por Usuario",
+					"event": "mostrarUsoUsuario"
+				}
+			]
+		},
+		{ "menuTitle": "Reserva Colectiva",
+		  		"options":
+			[
+				{
+					"label": "Adicionar Reserva Colectiva",
+					"event": "adicionarReservaColectiva"
+				},
+				{
+					"label": "Borrar reserva coelctiva por Id",
+					"event": "eliminarReservaColectivaPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de parranderos",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	

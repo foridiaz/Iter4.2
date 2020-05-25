@@ -1,0 +1,28 @@
+{
+	"title": "Nombres de las tablas de Alohandes para la aplicación A",
+	"unidadPersistencia": "Parranderos",
+	"tablas":
+	[
+		"alohandes_sequence",
+		"APARTAMENTO",
+		"CLIENTE",
+		"CONTRATO",
+		"CONTRATO_APARTAMENTO",
+		"CONTRATO_CLIENTE_ESPORADICO",
+		"CONTRATO_HAB_VIVIENDA",
+		"CONTRATOHABHOSTAL",
+		"CONTRATOHABHOTEL",
+		"CONTRATOHABUNIVERSITARIA",
+		"HOSTAL",
+		"HOTEL",
+		"OPERADOR",
+		"PERSONA_NATURAL",
+		"RESERVA",
+		"RESERVA_COLECTIVA",
+		"SEGURO_ARRENDAMIENTO",
+		"SERVICIO_HOTEL",
+		"SERVICIO_HABHOTEL",
+		"VIVIENDA_FAMILIAR",
+		"VIVIENDAUNIVERSITARIA"
+	]
+}
