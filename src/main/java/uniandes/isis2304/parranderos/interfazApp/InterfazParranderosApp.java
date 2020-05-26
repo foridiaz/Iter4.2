@@ -61,6 +61,7 @@ import uniandes.isis2304.parranderos.negocio.VOCliente;
 import uniandes.isis2304.parranderos.negocio.VOContrato;
 import uniandes.isis2304.parranderos.negocio.VOGanancia;
 import uniandes.isis2304.parranderos.negocio.VOIndice;
+import uniandes.isis2304.parranderos.negocio.VOOperador;
 import uniandes.isis2304.parranderos.negocio.VOReserva;
 import uniandes.isis2304.parranderos.negocio.VOUsosVinculo;
 
@@ -1089,6 +1090,33 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					}
 					panelDatos.actualizarInterfaz(resultado);
 				}
+				else if (clasificacion.equalsIgnoreCase("Cliente")) {
+					List<Cliente> clientes =parranderos.darClientes();
+					String resultado=""; 
+					for (int i=0;i<clientes.size();i++) {
+						long IdCli=clientes.get(i).getId();
+						resultado+=clientes.get(i).toString()+"\n"; 
+						List<VOContrato> reservas_cliente=parranderos.consultarConsumoCliente1(IdCli, fecha_inicio, fecha_fin);
+						resultado+=listarContratos(reservas_cliente);
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else if (clasificacion.equalsIgnoreCase("Tipo")) {
+					String resultado="";
+					ArrayList<String> alojamientos=new ArrayList<>();
+					alojamientos.add("Hotel"); 
+					alojamientos.add("Hostal"); 
+					alojamientos.add("Hab Vivienda"); 
+					alojamientos.add("Apartamento"); 
+					alojamientos.add("Cliente esporádico"); 
+					alojamientos.add("Vivienda Universitaria"); 
+					for (int i=0; i<alojamientos.size();i++) {
+						resultado+=alojamientos.get(i)+"\n";
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoTipo1(fecha_inicio, fecha_fin,alojamientos.get(i)); 
+						resultado+=listarConsumos(lista_clientes);
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
 			}
 
 		}
@@ -1104,6 +1132,15 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		String resp = "Los consumos de los clientes son:\n";
 		int i = 1;
 		for (VOCliente tb : lista)
+		{
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
+	private String listarReservas(List<VOReserva> lista) {
+		String resp="Las reservas de los clientes son:\n"; 
+		int i=1;
+		for (VOReserva tb : lista)
 		{
 			resp += i++ + ". " + tb.toString() + "\n";
 		}

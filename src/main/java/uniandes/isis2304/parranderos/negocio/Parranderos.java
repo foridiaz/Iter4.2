@@ -169,6 +169,12 @@ public class Parranderos
 		log.info ("Consultando Contratos: " + contratos.size() + " reservas existentes");
 		return contratos;
 	}
+	public List<Cliente> darClientes(){
+		log.info ("Consultando Clientes");
+		List<Cliente> clientes = pp.darClientes();	
+		log.info ("Consultando Clientes: " + clientes.size() + " reservas existentes");
+		return clientes;
+	}
 
 
 	public List<VOContrato> darVOContrato ()
@@ -650,6 +656,27 @@ public class Parranderos
 		log.info ("Generando los VO de los clientes");        
         List<VOCliente> voCliente = new LinkedList<VOCliente>();
         for (Cliente tb : pp.consultarConsumoOferta1(IdOf,fecha_inicio,fecha_fin))
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
+	
+	public List<VOContrato> consultarConsumoCliente1(long IdCli,String fecha_inicio, String fecha_fin){
+		log.info ("Generando los VO de los Contratos del cliente");        
+        List<VOContrato> voContrato = new LinkedList<VOContrato>();
+        for (Contrato tb : pp.consultarConsumoCliente1(IdCli,fecha_inicio,fecha_fin))
+        {
+        	voContrato.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voContrato.size());
+        return voContrato;
+	}
+	public List<VOCliente> consultarConsumoTipo1(String fecha_inicio, String fecha_fin,String alojamientos){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.consultarConsumoOferta1(fecha_inicio,fecha_fin,alojamientos))
         {
         	voCliente.add(tb);
         }
