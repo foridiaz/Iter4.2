@@ -1070,7 +1070,6 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			List<VOCliente> lista=null;
 			String tipoCliente = JOptionPane.showInputDialog (this, "Ingrese Administrador o Proveedor", "Tipo de cliente", JOptionPane.QUESTION_MESSAGE);
 			String fecha_inicio= JOptionPane.showInputDialog(this, "Fecha de Inicio(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
 			String fecha_fin=JOptionPane.showInputDialog(this, "Fecha de Finalización(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
@@ -1135,8 +1134,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 						long IdOf=contratos.get(i).getId();
 						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
 						if (lista_clientes.size()>0) {
-						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
-						resultado+=listarConsumos(lista_clientes);
+							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+							resultado+=listarConsumos(lista_clientes);
 						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
@@ -1166,6 +1165,90 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+
+
+	public void consultarConsumo2() {
+		try {
+			String tipoCliente = JOptionPane.showInputDialog (this, "Ingrese Administrador o Proveedor", "Tipo de cliente", JOptionPane.QUESTION_MESSAGE);
+			String fecha_inicio= JOptionPane.showInputDialog(this, "Fecha de Inicio(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
+			String fecha_fin=JOptionPane.showInputDialog(this, "Fecha de Finalización(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
+			String clasificacion=JOptionPane.showInputDialog (this, "Ingrese clasificación: Cliente, Oferta o Tipo", "Clasificación", JOptionPane.QUESTION_MESSAGE);
+			if (fecha_fin==null || fecha_inicio==null||tipoCliente==null||clasificacion==null) {
+				throw new Exception("Hubo un error con los datos ingresados"); 
+			}
+			if (tipoCliente.equalsIgnoreCase("Administrador")) {
+				if (clasificacion.equalsIgnoreCase("Oferta")) {
+					List<Contrato> contratos=parranderos.darContratos();
+					String resultado="";
+					panelDatos.actualizarInterfaz("Realizando Transacción");
+					for (int i=0;i<contratos.size();i++) {
+						long IdOf=contratos.get(i).getId();
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta2(IdOf,fecha_inicio, fecha_fin);
+						if (lista_clientes.size()>0) {
+							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+							resultado+=listarConsumos(lista_clientes);
+						}
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else if (clasificacion.equals("Cliente")) {
+					List<Cliente> clientes =parranderos.darClientes();
+					String resultado=""; 
+					for (int i=0;i<clientes.size();i++) {
+						long IdCli=clientes.get(i).getId();
+						List<VOContrato> reservas_cliente=parranderos.consultarConsumoCliente2(IdCli, fecha_inicio, fecha_fin);
+						if (reservas_cliente.size()>0) {
+							resultado+=clientes.get(i).toString()+"\n"; 
+							resultado+=listarContratos(reservas_cliente);
+						}
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else if (clasificacion.equalsIgnoreCase("Tipo")) {
+					String resultado="";
+					ArrayList<String> alojamientos=new ArrayList<>();
+					alojamientos.add("Hotel"); 
+					alojamientos.add("Hostal"); 
+					alojamientos.add("Hab Vivienda"); 
+					alojamientos.add("Apartamento"); 
+					alojamientos.add("Cliente esporádico"); 
+					alojamientos.add("Vivienda Universitaria"); 
+					for (int i=0; i<alojamientos.size();i++) {
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoTipo2(fecha_inicio, fecha_fin,alojamientos.get(i)); 
+						if (lista_clientes.size()>0) {
+							resultado+=alojamientos.get(i)+"\n";
+							resultado+=listarConsumos(lista_clientes);
+						}
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+
+			}
+			else if (tipoCliente.equalsIgnoreCase("Proveedor")) {
+				String Id=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
+				long IdOp=Long.valueOf(Id);
+				String tipo=JOptionPane.showInputDialog (this, "Ingrese el tipo de Alojamiento que ofrece\n (HOTEL,HOSTAL,HAB_VIVIENDA,APARTAMENTO,VIVIENDA_UNIVERSITARIA,ESPORADICO)", "Id Operador", JOptionPane.QUESTION_MESSAGE);
+				if (clasificacion.equals("Oferta")||clasificacion.equals("Tipo")) {
+					List<Contrato> contratos=parranderos.darContratosProveedor(IdOp,tipo); 
+					String resultado="";
+					for (int i=0; i<contratos.size();i++) {
+						long IdOf=contratos.get(i).getId();
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
+						if (lista_clientes.size()>0) {
+							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+							resultado+=listarConsumos(lista_clientes);
+						}
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			}
+
+		}catch(Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
 	private String listarConsumos(List<VOCliente> lista) 
 	{
 		String resp = "Los consumos de los clientes son:\n";

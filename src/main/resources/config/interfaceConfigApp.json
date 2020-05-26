@@ -53,6 +53,10 @@
 				{
 					"label": "Consultar Consumo",
 					"event": "consultarConsumo1"
+				},
+				{
+					"label": "Consultar Consumo No",
+					"event": "consultarConsumo2"
 				}
 			]
 		},

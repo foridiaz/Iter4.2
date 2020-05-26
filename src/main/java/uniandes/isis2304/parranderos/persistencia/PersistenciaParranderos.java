@@ -1340,11 +1340,20 @@ public class PersistenciaParranderos
 	public List<Contrato>consultarConsumoCliente1(long IdCli, String fecha_inicio, String fecha_fin){
 		return sqlCliente.consultarConsumoCliente1(pmf.getPersistenceManager(),IdCli,fecha_inicio,fecha_fin);
 	}
+	public List<Contrato> consultarConsumoCliente2(long IdCli, String fecha_inicio, String fecha_fin){
+		return sqlCliente.consultarConsumoCliente2(pmf.getPersistenceManager(),IdCli,fecha_inicio,fecha_fin);
+	}
 	public List<Contrato>consultarConsumoCliente11(long IdCli,long IdOp,String fecha_inicio,String fecha_fin){
 		return sqlCliente.consultarConsumoCliente11(pmf.getPersistenceManager(), IdCli,IdOp,fecha_inicio, fecha_fin);
 	}
-	public List<Cliente> consultarConsumoOferta1(String fecha_inicio, String fecha_fin, String alojamientos){
-		return sqlCliente.consultarConsumoOferta1(pmf.getPersistenceManager(),fecha_inicio,fecha_fin,alojamientos); 
+	public List<Cliente> consultarConsumoTipo1(String fecha_inicio, String fecha_fin, String alojamientos){
+		return sqlCliente.consultarConsumoTipo1(pmf.getPersistenceManager(),fecha_inicio,fecha_fin,alojamientos); 
+	}
+	public List<Cliente> consultarConsumoTipo2(String fecha_inicio,String fecha_fin, String alojamientos){
+		return sqlCliente.consultarConsumoTipo2(pmf.getPersistenceManager(),fecha_inicio,fecha_fin,alojamientos); 
+	}
+	public List<Cliente> consultarConsumoOferta2(long IdOf, String fecha_inicio, String fecha_fin){
+		return sqlCliente.consultarConsumoOferta2(pmf.getPersistenceManager(), IdOf, fecha_inicio, fecha_fin);
 	}
 	public List<Cliente> consultarConsumoOferta1( long IdOf, String fecha_inicio,String fecha_fin){
 		return sqlCliente.consultarConsumoOferta1(pmf.getPersistenceManager(),IdOf,fecha_inicio,fecha_fin);

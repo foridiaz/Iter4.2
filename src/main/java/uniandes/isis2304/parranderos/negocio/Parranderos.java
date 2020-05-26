@@ -662,11 +662,31 @@ public class Parranderos
         log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
         return voCliente;
 	}
+	public List<VOCliente> consultarConsumoOferta2(long IdOf,String fecha_inicio, String fecha_fin){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.consultarConsumoOferta2(IdOf,fecha_inicio,fecha_fin))
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
 	
 	public List<VOContrato> consultarConsumoCliente1(long IdCli,String fecha_inicio, String fecha_fin){
 		log.info ("Generando los VO de los Contratos del cliente");        
         List<VOContrato> voContrato = new LinkedList<VOContrato>();
         for (Contrato tb : pp.consultarConsumoCliente1(IdCli,fecha_inicio,fecha_fin))
+        {
+        	voContrato.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voContrato.size());
+        return voContrato;
+	}
+	public List<VOContrato> consultarConsumoCliente2(long IdCli,String  fecha_inicio, String fecha_fin){
+		log.info ("Generando los VO de los Contratos del cliente");        
+        List<VOContrato> voContrato = new LinkedList<VOContrato>();
+        for (Contrato tb : pp.consultarConsumoCliente2(IdCli,fecha_inicio,fecha_fin))
         {
         	voContrato.add(tb);
         }
@@ -687,7 +707,17 @@ public class Parranderos
 	public List<VOCliente> consultarConsumoTipo1(String fecha_inicio, String fecha_fin,String alojamientos){
 		log.info ("Generando los VO de los clientes");        
         List<VOCliente> voCliente = new LinkedList<VOCliente>();
-        for (Cliente tb : pp.consultarConsumoOferta1(fecha_inicio,fecha_fin,alojamientos))
+        for (Cliente tb : pp.consultarConsumoTipo1(fecha_inicio,fecha_fin,alojamientos))
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
+	public List<VOCliente> consultarConsumoTipo2(String fecha_inicio, String fecha_fin,String alojamientos){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.consultarConsumoTipo2(fecha_inicio,fecha_fin,alojamientos))
         {
         	voCliente.add(tb);
         }
