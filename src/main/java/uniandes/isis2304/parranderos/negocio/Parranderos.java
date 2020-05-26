@@ -683,6 +683,16 @@ public class Parranderos
         log.info ("Generando los VO de los Usos por vínculo: " + voContrato.size());
         return voContrato;
 	}
+	public List<VOCliente> consultarConsumoOfertaP(long IdOf,String fecha_inicio,String fecha_fin){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.consultarConsumoOfertaP(IdOf,fecha_inicio,fecha_fin))
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
 	public List<VOContrato> consultarConsumoCliente2(long IdCli,String  fecha_inicio, String fecha_fin){
 		log.info ("Generando los VO de los Contratos del cliente");        
         List<VOContrato> voContrato = new LinkedList<VOContrato>();

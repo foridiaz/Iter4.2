@@ -1228,15 +1228,18 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 				String Id=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
 				long IdOp=Long.valueOf(Id);
 				String tipo=JOptionPane.showInputDialog (this, "Ingrese el tipo de Alojamiento que ofrece\n (HOTEL,HOSTAL,HAB_VIVIENDA,APARTAMENTO,VIVIENDA_UNIVERSITARIA,ESPORADICO)", "Id Operador", JOptionPane.QUESTION_MESSAGE);
-				if (clasificacion.equals("Oferta")||clasificacion.equals("Tipo")) {
+				if (clasificacion.equals("Oferta")||clasificacion.equals("Tipo")||clasificacion.equals("Cliente")) {
 					List<Contrato> contratos=parranderos.darContratosProveedor(IdOp,tipo); 
 					String resultado="";
 					for (int i=0; i<contratos.size();i++) {
 						long IdOf=contratos.get(i).getId();
-						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoOfertaP(IdOf, fecha_inicio, fecha_fin);
 						if (lista_clientes.size()>0) {
 							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
 							resultado+=listarConsumos(lista_clientes);
+						}else {
+							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+							resultado+="No se encontró ningún cliente \n";
 						}
 					}
 					panelDatos.actualizarInterfaz(resultado);

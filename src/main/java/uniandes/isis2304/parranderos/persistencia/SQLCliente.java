@@ -93,7 +93,15 @@ public class SQLCliente{
 		return (List<Contrato>) q.executeList();
 	}
 	
-	
+	public List<Cliente> consultarConsumoOfertaP(PersistenceManager pm,long IdOf, String fecha_inicio, String fecha_fin ){
+		Query q=pm.newQuery(SQL,"SELECT CT.* FROM CLIENTE CT JOIN (SELECT * FROM RESERVA WHERE ID_CONTRATO="+IdOf+")C ON CT.ID=C.ID_CLIENTE \r\n" + 
+				"MINUS\r\n" + 
+				"SELECT CLI.* FROM (SELECT * FROM CLIENTE) CLI JOIN (SELECT * FROM RESERVA WHERE ID_CONTRATO="+IdOf+" AND \r\n" + 
+				"				                            TO_DATE(FECHA_INICIO,'DD/MM/YYYY HH24;MI:SS')<=TO_DATE('"+fecha_fin+"','DD/MM/YYYY HH24;MI:SS') AND \r\n" + 
+				"				                            TO_DATE(FECHA_INICIO,'DD/MM/YYYY HH24;MI:SS')>=TO_DATE('"+fecha_inicio+"','DD/MM/YYYY HH24;MI:SS') )A ON CLI.ID=A.ID_CLIENTE ");
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>) q.executeList();
+	}
 	
 	public List<Cliente> darClientes (PersistenceManager pm)
 	{
@@ -212,5 +220,6 @@ public class SQLCliente{
 		}
 		return lista;
 	}
+	
 
 }

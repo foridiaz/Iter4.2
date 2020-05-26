@@ -1355,6 +1355,9 @@ public class PersistenciaParranderos
 	public List<Cliente> consultarConsumoOferta2(long IdOf, String fecha_inicio, String fecha_fin){
 		return sqlCliente.consultarConsumoOferta2(pmf.getPersistenceManager(), IdOf, fecha_inicio, fecha_fin);
 	}
+	public List<Cliente> consultarConsumoOfertaP(long IdOf,String fecha_inicio, String fecha_fin){
+		return sqlCliente.consultarConsumoOfertaP(pmf.getPersistenceManager(), IdOf, fecha_inicio, fecha_fin);
+	}
 	public List<Cliente> consultarConsumoOferta1( long IdOf, String fecha_inicio,String fecha_fin){
 		return sqlCliente.consultarConsumoOferta1(pmf.getPersistenceManager(),IdOf,fecha_inicio,fecha_fin);
 	
