@@ -1139,10 +1139,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					String resultado=""; 
 					for (int i=0;i<clientes.size();i++) {
 						long IdCli=clientes.get(i).getId();
-						resultado+=clientes.get(i).toString()+"\n"; 
 						for (int j=0;j<contratos.size();j++) {
 							List<VOContrato> reservas_cliente=parranderos.consultarConsumoCliente11(IdCli,contratos.get(j).getId(), fecha_inicio, fecha_fin);
-							resultado+=listarContratos(reservas_cliente);
+							if (reservas_cliente.size()>0){
+								resultado+=clientes.get(i).toString()+"\n"; 
+								resultado+=listarContratos(reservas_cliente);}
 						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
