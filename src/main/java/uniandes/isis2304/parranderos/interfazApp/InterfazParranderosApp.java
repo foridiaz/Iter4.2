@@ -1084,9 +1084,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					String resultado="";
 					for (int i=0;i<contratos.size();i++) {
 						long IdOf=contratos.get(i).getId();
-						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
 						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
-						resultado+=listarConsumos(lista_clientes);
+						if (lista_clientes.size()>0) {
+							resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+							resultado+=listarConsumos(lista_clientes);
+						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
 				}
@@ -1095,9 +1097,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					String resultado=""; 
 					for (int i=0;i<clientes.size();i++) {
 						long IdCli=clientes.get(i).getId();
-						resultado+=clientes.get(i).toString()+"\n"; 
 						List<VOContrato> reservas_cliente=parranderos.consultarConsumoCliente1(IdCli, fecha_inicio, fecha_fin);
-						resultado+=listarContratos(reservas_cliente);
+						if (reservas_cliente.size()>0) {
+							resultado+=clientes.get(i).toString()+"\n"; 
+							resultado+=listarContratos(reservas_cliente);
+						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
 				}
@@ -1111,9 +1115,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					alojamientos.add("Cliente esporádico"); 
 					alojamientos.add("Vivienda Universitaria"); 
 					for (int i=0; i<alojamientos.size();i++) {
-						resultado+=alojamientos.get(i)+"\n";
 						List<VOCliente> lista_clientes=parranderos.consultarConsumoTipo1(fecha_inicio, fecha_fin,alojamientos.get(i)); 
-						resultado+=listarConsumos(lista_clientes);
+						if (lista_clientes.size()>0) {
+							resultado+=alojamientos.get(i)+"\n";
+							resultado+=listarConsumos(lista_clientes);
+						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
 				}
@@ -1122,14 +1128,16 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 				String Id=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
 				long IdOp=Long.valueOf(Id);
 				String tipo=JOptionPane.showInputDialog (this, "Ingrese el tipo de Alojamiento que ofrece\n (HOTEL,HOSTAL,HAB_VIVIENDA,APARTAMENTO,VIVIENDA_UNIVERSITARIA,ESPORADICO)", "Id Operador", JOptionPane.QUESTION_MESSAGE);
-				if (clasificacion.equals("Oferta")) {
+				if (clasificacion.equals("Oferta")||clasificacion.equals("Tipo")) {
 					List<Contrato> contratos=parranderos.darContratosProveedor(IdOp,tipo); 
 					String resultado="";
 					for (int i=0; i<contratos.size();i++) {
 						long IdOf=contratos.get(i).getId();
-						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
 						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
+						if (lista_clientes.size()>0) {
+						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
 						resultado+=listarConsumos(lista_clientes);
+						}
 					}
 					panelDatos.actualizarInterfaz(resultado);
 				}
