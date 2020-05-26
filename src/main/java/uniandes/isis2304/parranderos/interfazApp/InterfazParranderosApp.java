@@ -1272,7 +1272,49 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		return resp;
 	}
 
-
+	public void buenosClientes() {
+		try {
+			String strPrecio=JOptionPane.showInputDialog (this, "Ingrese Precio Costoso", "Precio Costoso", JOptionPane.QUESTION_MESSAGE);
+			int costoso=Integer.parseInt(strPrecio);
+			String resultado=""; 
+			resultado+="Una vez al mes: \n";
+			List<VOCliente> lista_una_vez=parranderos.darBuenosClientesUnaVez();
+			if (lista_una_vez.size()>0) {
+				resultado+=listarClientes(lista_una_vez);
+			}else {
+				resultado+="No hay ningún buen cliente por este criterio \n";
+			}
+			resultado+="Alojamientos costosos: \n";
+			
+			List<VOCliente> lista_costosos=parranderos.darBuenosClientesCostosos(costoso);
+			if (lista_costosos.size()>0) {
+				resultado+=listarClientes(lista_costosos);
+			}else {
+				resultado+="No hay ningún buen cliente por este criterio \n";
+			}
+			resultado+="Siempre reservan Suite: \n"; 
+			List<VOCliente> lista_suites=parranderos.darBuenosClientesSuite();
+			if (lista_suites.size()>0) {
+				resultado+=listarClientes(lista_suites);
+			}else {
+				resultado+="No hay ningún buen cliente por este criterio \n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+		}catch(Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	private String listarClientes(List<VOCliente> lista) 
+	{
+		String resp = "Los clientes son \n";
+		int i = 1;
+		for (VOCliente tb : lista)
+		{
+			resp += i++ + ". " + tb.toString() + "\n";
+		}
+		return resp;
+	}
 
 
 	//    public void mostrarUsoUsuario() {

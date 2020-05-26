@@ -740,6 +740,36 @@ public class Parranderos
 		log.info ("Consultando Contratos: " + contratos.size() + " reservas existentes");
 		return contratos;
 	}
+	public List<VOCliente> darBuenosClientesUnaVez(){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.darBuenosClientesUnaVez())
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
+	public List<VOCliente> darBuenosClientesCostosos(int costoso){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.darBuenosClientesCostosos(costoso))
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
+	public List<VOCliente> darBuenosClientesSuite(){
+		log.info ("Generando los VO de los clientes");        
+        List<VOCliente> voCliente = new LinkedList<VOCliente>();
+        for (Cliente tb : pp.darBuenosClientesSuite())
+        {
+        	voCliente.add(tb);
+        }
+        log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
+        return voCliente;
+	}
 	
 	/* ****************************************************************
 	 * 			Métodos para administración
