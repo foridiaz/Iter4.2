@@ -26,6 +26,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.parranderos.negocio.Cliente;
 import uniandes.isis2304.parranderos.negocio.Contrato;
 import uniandes.isis2304.parranderos.negocio.ContratoHabHostal;
 import uniandes.isis2304.parranderos.negocio.ContratoHabHotel;
@@ -1329,6 +1330,8 @@ public class PersistenciaParranderos
 			pm.close();
 		}
 	}
-
+	public List<Cliente> consultarConsumo1(String tipo, long IdOf, long IdOp, String fecha_inicio,String fecha_fin){
+		return sqlCliente.consultarConsumo1(pmf.getPersistenceManager(),tipo,IdOf,IdOp,fecha_inicio,fecha_fin);
+	}
 
 }

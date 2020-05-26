@@ -1070,19 +1070,30 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		{
 			List<VOCliente> lista=null;
 			String tipoCliente = JOptionPane.showInputDialog (this, "Ingrese Administrador o Proveedor", "Tipo de cliente", JOptionPane.QUESTION_MESSAGE);
+			String fecha_inicio= JOptionPane.showInputDialog(this, "Fecha de Inicio(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
+			String fecha_fin=JOptionPane.showInputDialog(this, "Fecha de Finalización(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
 			String id=JOptionPane.showInputDialog (this, "Ingrese el Id de la oferta", "Id Oferta", JOptionPane.QUESTION_MESSAGE);
+			String clasificacion=JOptionPane.showInputDialog (this, "Ingrese clasificación: Cliente, Oferta o Tipo", "Clasificación", JOptionPane.QUESTION_MESSAGE);
+			if (fecha_fin==null || fecha_fin==null) {
+				throw new Exception("Las fechas no fueron especificadas");
+			}
 			if (id!=null) {
 				long idOf = Long.valueOf (id);
 				if (tipoCliente.equalsIgnoreCase("administrador")){
-					lista = parranderos.consultarConsumo1(tipoCliente,idOf);
+					lista = parranderos.consultarConsumo1(tipoCliente,idOf,0,fecha_inicio,fecha_fin);
 				}
 				else if (tipoCliente.equalsIgnoreCase("proveedor")) {
+					if (clasificacion.equalsIgnoreCase("Oferta")||clasificacion.equalsIgnoreCase("Tipo")) {
+						throw new Exception("Los proveedores no pueden acceder a este tipo de clasificación");
+					}
 					String idOp=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
 					if (idOp==null) {
 						String resultado="No se indico el Id del Operador que está realizando la consulta"; 
 						panelDatos.actualizarInterfaz(resultado);
 					}
-					lista = parranderos.consultarConsumo1(tipoCliente,idOf);	
+					else{
+						lista = parranderos.consultarConsumo1(tipoCliente,idOf,Long.valueOf(idOp),fecha_inicio,fecha_fin);	
+					}
 				}
 				if (lista!=null) {
 					String resultado = "Mostrar Consumo Clientes";
