@@ -53,6 +53,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.isis2304.parranderos.negocio.Cliente;
 import uniandes.isis2304.parranderos.negocio.Contrato;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.Reserva;
@@ -1072,40 +1073,24 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			String tipoCliente = JOptionPane.showInputDialog (this, "Ingrese Administrador o Proveedor", "Tipo de cliente", JOptionPane.QUESTION_MESSAGE);
 			String fecha_inicio= JOptionPane.showInputDialog(this, "Fecha de Inicio(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
 			String fecha_fin=JOptionPane.showInputDialog(this, "Fecha de Finalización(dd/MM/YYYY hh:mm:ss PM/AM)", "Adicionar Reserva" ,JOptionPane.QUESTION_MESSAGE);
-			String id=JOptionPane.showInputDialog (this, "Ingrese el Id de la oferta", "Id Oferta", JOptionPane.QUESTION_MESSAGE);
 			String clasificacion=JOptionPane.showInputDialog (this, "Ingrese clasificación: Cliente, Oferta o Tipo", "Clasificación", JOptionPane.QUESTION_MESSAGE);
-			if (fecha_fin==null || fecha_fin==null) {
-				throw new Exception("Las fechas no fueron especificadas");
+			if (fecha_fin==null || fecha_inicio==null||tipoCliente==null||clasificacion==null) {
+				throw new Exception("Hubo un error con los datos ingresados"); 
 			}
-			if (id!=null) {
-				long idOf = Long.valueOf (id);
-				if (tipoCliente.equalsIgnoreCase("administrador")){
-					lista = parranderos.consultarConsumo1(tipoCliente,idOf,0,fecha_inicio,fecha_fin);
-				}
-				else if (tipoCliente.equalsIgnoreCase("proveedor")) {
-					if (clasificacion.equalsIgnoreCase("Oferta")||clasificacion.equalsIgnoreCase("Tipo")) {
-						throw new Exception("Los proveedores no pueden acceder a este tipo de clasificación");
+			if (tipoCliente.equalsIgnoreCase("Administrador")) {
+				if (clasificacion.equalsIgnoreCase("Oferta")) {
+					List<Contrato> contratos=parranderos.darContratos();
+					String resultado="";
+					for (int i=0;i<contratos.size();i++) {
+						long IdOf=contratos.get(i).getId();
+						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
+						resultado+=listarConsumos(lista_clientes);
 					}
-					String idOp=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
-					if (idOp==null) {
-						String resultado="No se indico el Id del Operador que está realizando la consulta"; 
-						panelDatos.actualizarInterfaz(resultado);
-					}
-					else{
-						lista = parranderos.consultarConsumo1(tipoCliente,idOf,Long.valueOf(idOp),fecha_inicio,fecha_fin);	
-					}
-				}
-				if (lista!=null) {
-					String resultado = "Mostrar Consumo Clientes";
-					resultado +=  "\n" + listarConsumos (lista);
-					panelDatos.actualizarInterfaz(resultado);
-					resultado += "\n Operación terminada";
-				}
-				else if (lista==null) {
-					String resultado="El tipo de cliente no fue válido";
 					panelDatos.actualizarInterfaz(resultado);
 				}
-			} 
+			}
+
 		}
 		catch (Exception e) 
 		{

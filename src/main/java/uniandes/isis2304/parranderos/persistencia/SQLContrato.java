@@ -190,7 +190,7 @@ public class SQLContrato{
 	 */
 	public List<Contrato> darContratos (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaContrato ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM CONTRATO");
 		q.setResultClass(Contrato.class);
 		return (List<Contrato>) q.executeList();
 	}

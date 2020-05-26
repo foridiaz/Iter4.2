@@ -646,10 +646,10 @@ public class Parranderos
 	/* ****************************************************************
 	 * 			Métodos para Consumos 
 	 *****************************************************************/
-	public List<VOCliente> consultarConsumo1(String tipo,long IdOf,long IdOp,String fecha_inicio, String fecha_fin){
+	public List<VOCliente> consultarConsumoOferta1(long IdOf,String fecha_inicio, String fecha_fin){
 		log.info ("Generando los VO de los clientes");        
         List<VOCliente> voCliente = new LinkedList<VOCliente>();
-        for (Cliente tb : pp.consultarConsumo1(tipo,IdOf,IdOp,fecha_inicio,fecha_fin))
+        for (Cliente tb : pp.consultarConsumoOferta1(IdOf,fecha_inicio,fecha_fin))
         {
         	voCliente.add(tb);
         }

@@ -138,7 +138,7 @@ public class PersistenciaParranderos
 	
 	private SQLReservaColectiva sqlReservaColectiva; 
 
-
+	private SQLCliente sqlCliente;
 
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -252,6 +252,7 @@ public class PersistenciaParranderos
 		sqlOperador = new SQLOperador(this);
 		sqlReserva = new SQLReserva(this);
 		sqlReservaColectiva = new SQLReservaColectiva(this);
+		sqlCliente= new SQLCliente(this);
 	}
 
 	/**
@@ -1330,8 +1331,9 @@ public class PersistenciaParranderos
 			pm.close();
 		}
 	}
-	public List<Cliente> consultarConsumo1(String tipo, long IdOf, long IdOp, String fecha_inicio,String fecha_fin){
-		return sqlCliente.consultarConsumo1(pmf.getPersistenceManager(),tipo,IdOf,IdOp,fecha_inicio,fecha_fin);
+	public List<Cliente> consultarConsumoOferta1( long IdOf, String fecha_inicio,String fecha_fin){
+		return sqlCliente.consultarConsumoOferta1(pmf.getPersistenceManager(),IdOf,fecha_inicio,fecha_fin);
+	
 	}
 
 }
