@@ -673,6 +673,17 @@ public class Parranderos
         log.info ("Generando los VO de los Usos por vínculo: " + voContrato.size());
         return voContrato;
 	}
+	public List<VOContrato> consultarConsumoCliente11(long IdCli,long IdOp,String fecha_inicio,String fecha_fin){
+		log.info ("Generando los VO de los Contratos del cliente");        
+        List<VOContrato> voContrato = new LinkedList<VOContrato>();
+        for (Contrato tb : pp.consultarConsumoCliente11(IdCli,IdOp,fecha_inicio,fecha_fin))
+        {
+        	voContrato.add(tb);
+        }
+        log.info ("Generando los VO de Contratos: " + voContrato.size());
+        System.out.println(voContrato);
+        return voContrato;
+	}
 	public List<VOCliente> consultarConsumoTipo1(String fecha_inicio, String fecha_fin,String alojamientos){
 		log.info ("Generando los VO de los clientes");        
         List<VOCliente> voCliente = new LinkedList<VOCliente>();
@@ -682,6 +693,12 @@ public class Parranderos
         }
         log.info ("Generando los VO de los Usos por vínculo: " + voCliente.size());
         return voCliente;
+	}
+	public List<Contrato> darContratosProveedor(long IdOp, String tipo){
+		log.info ("Consultando Contratos");
+		List<Contrato> contratos = pp.darContratosProveedor(IdOp,tipo);	
+		log.info ("Consultando Contratos: " + contratos.size() + " reservas existentes");
+		return contratos;
 	}
 	
 	/* ****************************************************************

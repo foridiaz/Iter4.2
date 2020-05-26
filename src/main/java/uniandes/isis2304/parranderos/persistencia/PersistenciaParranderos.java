@@ -551,6 +551,9 @@ public class PersistenciaParranderos
 	{
 		return sqlContrato.darContratos(pmf.getPersistenceManager());
 	}
+	public List<Contrato> darContratosProveedor(long IdOp,String tipo){
+		return sqlContrato.darContratosProveedor(pmf.getPersistenceManager(),IdOp,tipo);
+	}
 	public List<Cliente> darClientes(){
 		return sqlCliente.darClientes(pmf.getPersistenceManager());
 	}
@@ -1336,6 +1339,9 @@ public class PersistenciaParranderos
 	}
 	public List<Contrato>consultarConsumoCliente1(long IdCli, String fecha_inicio, String fecha_fin){
 		return sqlCliente.consultarConsumoCliente1(pmf.getPersistenceManager(),IdCli,fecha_inicio,fecha_fin);
+	}
+	public List<Contrato>consultarConsumoCliente11(long IdCli,long IdOp,String fecha_inicio,String fecha_fin){
+		return sqlCliente.consultarConsumoCliente11(pmf.getPersistenceManager(), IdCli,IdOp,fecha_inicio, fecha_fin);
 	}
 	public List<Cliente> consultarConsumoOferta1(String fecha_inicio, String fecha_fin, String alojamientos){
 		return sqlCliente.consultarConsumoOferta1(pmf.getPersistenceManager(),fecha_inicio,fecha_fin,alojamientos); 

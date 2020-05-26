@@ -1118,6 +1118,36 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 					panelDatos.actualizarInterfaz(resultado);
 				}
 			}
+			else if (tipoCliente.equals("Proveedor")) {
+				String Id=JOptionPane.showInputDialog (this, "Ingrese el Id del Operador", "Id Operador", JOptionPane.QUESTION_MESSAGE);
+				long IdOp=Long.valueOf(Id);
+				String tipo=JOptionPane.showInputDialog (this, "Ingrese el tipo de Alojamiento que ofrece\n (HOTEL,HOSTAL,HAB_VIVIENDA,APARTAMENTO,VIVIENDA_UNIVERSITARIA,ESPORADICO)", "Id Operador", JOptionPane.QUESTION_MESSAGE);
+				if (clasificacion.equals("Oferta")) {
+					List<Contrato> contratos=parranderos.darContratosProveedor(IdOp,tipo); 
+					String resultado="";
+					for (int i=0; i<contratos.size();i++) {
+						long IdOf=contratos.get(i).getId();
+						resultado+="ID OFERTA:"+contratos.get(i).getId()+"\n";
+						List<VOCliente> lista_clientes=parranderos.consultarConsumoOferta1(IdOf,fecha_inicio, fecha_fin);
+						resultado+=listarConsumos(lista_clientes);
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else if (clasificacion.equals("Cliente")) {
+					List<Cliente> clientes =parranderos.darClientes();
+					List<Contrato> contratos=parranderos.darContratosProveedor(IdOp, tipo);
+					String resultado=""; 
+					for (int i=0;i<clientes.size();i++) {
+						long IdCli=clientes.get(i).getId();
+						resultado+=clientes.get(i).toString()+"\n"; 
+						for (int j=0;j<contratos.size();j++) {
+							List<VOContrato> reservas_cliente=parranderos.consultarConsumoCliente11(IdCli,contratos.get(j).getId(), fecha_inicio, fecha_fin);
+							resultado+=listarContratos(reservas_cliente);
+						}
+					}
+					panelDatos.actualizarInterfaz(resultado);
+				}
+			}
 
 		}
 		catch (Exception e) 

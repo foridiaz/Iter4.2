@@ -340,6 +340,50 @@ public class SQLContrato{
 			return (long)q.executeUnique();
 		}
 	}
+
+	public List<Contrato> darContratosProveedor(PersistenceManager pm ,long IdOp, String tipo){
+		List<Contrato> lista=null;
+		if (tipo.equals("HOTEL")) {
+			Query q=pm.newQuery(SQL,"SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT CT.* FROM HOTEL JOIN (SELECT * FROM CONTRATOHABHOTEL) CT ON hotel.id=CT.ID_HOTEL WHERE HOTEL.ID="+IdOp+") HT\n" + 
+					"                                        ON CTT.ID=HT.ID_CONTRATO");
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>) q.executeList();
+		}
+		else if (tipo.equals("HOSTAL")) {
+			Query q=pm.newQuery(SQL,"SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT CT.* FROM HOSTAL JOIN (SELECT * FROM CONTRATOHABHOSTAL) CT ON hostal.id=CT.ID_HOSTAL WHERE HOSTAL.ID="+IdOp+") HT\n" + 
+					"                                        ON CTT.ID=HT.ID_CONTRATO");
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>) q.executeList(); 
+		}
+		else if (tipo.equals("HAB_VIVIENDA")) {
+			Query q=pm.newQuery(SQL,"SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT * FROM VIVIENDA_FAMILIAR JOIN (SELECT * FROM CONTRATO_HAB_VIVIENDA)CT ON vivienda_familiar.id=CT.ID_VIVIENDA WHERE ID_PERSONA_NATURAL="+IdOp+") C\n" + 
+					"                                          ON CTT.ID=C.ID_CONTRATO"); 
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>) q.executeList();
+		}
+		else if (tipo.equals("APARTAMENTO")) {
+			Query q=pm.newQuery(SQL, "SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT * FROM APARTAMENTO JOIN (SELECT * FROM CONTRATO_APARTAMENTO)CT ON APARTAMENTO.id=CT.ID_APARTAMENTO WHERE ID_PERSONA_NATURAL="+IdOp+") C\n" + 
+					"                                          ON CTT.ID=C.ID_CONTRATO");
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>) q.executeList();
+		}
+		else if (tipo.equals("VIVIENDA_UNIVERSITARIA")) {
+			Query q=pm.newQuery(SQL,"SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT * FROM VIVIENDAUNIVERSITARIA JOIN (SELECT * FROM CONTRATOHABUNIVERSITARIA)CT ON VIVIENDAUNIVERSITARIA.id=CT.ID_VIVIENDA WHERE ID_VIVIENDA="+IdOp+") C\n" + 
+					"                                          ON CTT.ID=C.ID_CONTRATO"); 
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>) q.executeList();
+		}
+		else if (tipo.equals("ESPORADICO")) {
+			Query q=pm.newQuery(SQL,"SELECT CTT.* FROM (SELECT * FROM CONTRATO)CTT JOIN (SELECT * FROM APARTAMENTO JOIN (SELECT * FROM CONTRATO_CLIENTE_ESPORADICO)CT ON APARTAMENTO.id=CT.ID_APARTAMENTO WHERE ID_PERSONA_NATURAL="+IdOp+") C\n" + 
+					"                                          ON CTT.ID=C.ID_CONTRATO"); 
+			q.setResultClass(Contrato.class);
+			lista=(List<Contrato>)q.executeList();
+		}
+
+		return lista; 
+	}
+
+
 	public List<Contrato> darContratosPorCar(List<String> car, PersistenceManager pm){
 		List<Contrato> retornar = new LinkedList<>();
 		List<Integer> todos= new LinkedList<>();

@@ -66,6 +66,19 @@ public class SQLCliente{
 		q.setResultClass(Contrato.class);
 		return (List<Contrato>) q.executeList();
 	}
+	
+	public List<Contrato> consultarConsumoCliente11(PersistenceManager pm,long IdCli,long IdCon, String fecha_inicio, String fecha_fin){
+		Query q=pm.newQuery(SQL,"SELECT CT.* FROM CONTRATO CT JOIN (SELECT * FROM (SELECT * FROM CLIENTE) CLI JOIN (SELECT * FROM RESERVA WHERE ID_CLIENTE="+IdCli+" AND \r\n" + 
+				"                            TO_DATE(FECHA_INICIO,'DD/MM/YYYY HH24;MI:SS')<=TO_DATE('"+fecha_fin+"','DD/MM/YYYY HH24;MI:SS') AND\r\n" + 
+				"                            TO_DATE(FECHA_INICIO,'DD/MM/YYYY HH24;MI:SS')>=TO_DATE('"+fecha_inicio+"','DD/MM/YYYY HH24;MI:SS') AND ID_CONTRATO="+IdCon+" )A ON CLI.ID=A.ID_CLIENTE\r\n" + 
+				"                            ORDER BY CLI.ID) X\r\n" + 
+				"                            ON CT.ID=X.ID_CONTRATO");
+		q.setResultClass(Contrato.class);
+		return (List<Contrato>) q.executeList();
+	}
+	
+	
+	
 	public List<Cliente> darClientes (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM CLIENTE");
